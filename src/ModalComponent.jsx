@@ -41,7 +41,6 @@ class ModalComponent extends Component {
                     value={comment}
                     onChange={this.handleCommentChange}
                     placeholder="Add your comment here"
-                    required
                 />
                 <div className="button-container">
                     <button onClick={this.handleAddNutrient}>Add</button>
