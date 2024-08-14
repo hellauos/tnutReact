@@ -24,6 +24,17 @@ const Inventory = () => {
         localStorage.removeItem("fdcIds");
     };
 
+    const deleteNutrient = (index) => {
+        const updatedNutrients = nutrients.filter((_, i) => i !== index);
+        const updatedFdcIds = fdcIds.filter((_, i) => i !== index);
+
+        setNutrients(updatedNutrients);
+        setFdcIds(updatedFdcIds);
+
+        localStorage.setItem("nutrients", JSON.stringify(updatedNutrients));
+        localStorage.setItem("fdcIds", JSON.stringify(updatedFdcIds));
+    };
+
     return (
         <div>
             <h1>Inventory</h1>
@@ -50,6 +61,9 @@ const Inventory = () => {
                             <div className="inventory-list-item">
                                 <strong>Comment:</strong> {nutrient.comment}
                             </div>
+                            <button onClick={() => deleteNutrient(index)}>
+                                Delete
+                            </button>
                         </li>
                     ))
                 )}
