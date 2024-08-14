@@ -1,44 +1,55 @@
+import { Component } from "react";
 import Modal from "react-modal";
-import { useState } from "react";
 import "./App.css";
 
-const ModalComponent = ({
-    isOpen,
-    onRequestClose,
-    selectedNutrient,
-    addNutrient,
-}) => {
-    const [comment, setComment] = useState("");
+class ModalComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            comment: "",
+        };
+    }
 
-    const handleAddNutrient = () => {
+    handleAddNutrient = () => {
+        const { selectedNutrient, addNutrient, onRequestClose } = this.props;
+        const { comment } = this.state;
+
         if (selectedNutrient) {
             addNutrient(selectedNutrient, comment);
             console.log("Nutrient added:", selectedNutrient);
         }
-        setComment("");
+        this.setState({ comment: "" });
         onRequestClose();
     };
 
-    return (
-        <Modal
-            isOpen={isOpen}
-            onRequestClose={onRequestClose}
-            contentLabel="Add Nutrient Comment"
-            // className="custom-model"
-        >
-            <h2>Add Comment for Nutrient</h2>
-            <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Add your comment here"
-                required
-            />
-            <div className="button-container">
-                <button onClick={handleAddNutrient}>Add</button>
-                <button onClick={onRequestClose}>Cancel</button>
-            </div>
-        </Modal>
-    );
-};
+    handleCommentChange = (e) => {
+        this.setState({ comment: e.target.value });
+    };
+
+    render() {
+        const { isOpen, onRequestClose } = this.props;
+        const { comment } = this.state;
+
+        return (
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={onRequestClose}
+                contentLabel="Add Nutrient Comment"
+            >
+                <h2>Add Comment for Nutrient</h2>
+                <textarea
+                    value={comment}
+                    onChange={this.handleCommentChange}
+                    placeholder="Add your comment here"
+                    required
+                />
+                <div className="button-container">
+                    <button onClick={this.handleAddNutrient}>Add</button>
+                    <button onClick={onRequestClose}>Cancel</button>
+                </div>
+            </Modal>
+        );
+    }
+}
 
 export default ModalComponent;
