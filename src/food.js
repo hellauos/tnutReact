@@ -7,7 +7,6 @@ export const fetchFoodData = async () => {
         const response = await fetch(url);
         const data = await response.json();
 
-        // Filter data to exclude items where dataType is 'Experimental'
         const filteredData = data.filter(food => food.dataType !== 'Experimental');
 
         return filteredData.map(food => ({

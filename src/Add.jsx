@@ -3,7 +3,6 @@ import { fetchFoodData } from "./food";
 import { Link } from "react-router-dom";
 
 import "./App.css";
-// import "./index.css";
 
 const Add = () => {
     const [dataTypes, setDataTypes] = useState([]);

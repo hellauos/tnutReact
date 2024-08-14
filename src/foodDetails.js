@@ -24,6 +24,6 @@ export const fetchFoodDetails = async ({ queryKey }) => {
         };
     } catch (error) {
         console.error("Error fetching data:", error);
-        return null; // Return null in case of error
+        return null;
     }
 };
